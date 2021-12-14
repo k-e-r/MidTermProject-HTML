@@ -8,7 +8,7 @@ const fetchData = async (search) => {
   });
 
   console.log(response.data);
-  return response.data.works;
+  return search === '' ? '' : response.data;
 };
 
 const createAutoComplete = () => {
@@ -25,20 +25,13 @@ const createAutoComplete = () => {
     const items = await fetchData(event.target.value);
 
     results.innerHTML = '';
-    for (let item of items) {
+    for (let item of items.works) {
       const option = document.createElement('a');
       const image =
         item.images.recommended_url === ''
           ? 'https://placehold.jp/400x250.png'
           : item.images.recommended_url;
 
-      // option.classList.add('dropdown-item');
-      // option.innerHTML = renderOption(item);
-      // option.addEventListener('click', () => {
-      //   dropdown.classList.remove('is-active');
-      //   input.value = inputValue(item);
-      //   onOptionSelect(item);
-      // });
       option.innerHTML = `
         <img src="${image}" />
         <div class="contents">
@@ -51,9 +44,18 @@ const createAutoComplete = () => {
 
       results.appendChild(option);
     }
+    if (items.total_count === 0) {
+      const option = document.createElement('a');
+      option.innerHTML = `
+        <div class="undefined">
+          <p>"${event.target.value}" is UNDEFINED</p>
+        </div>
+      `;
+
+      results.appendChild(option);
+    }
   };
   input.addEventListener('input', debounce(onInput, 500));
 };
 
-// fetchData();
 createAutoComplete();

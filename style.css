@@ -104,6 +104,13 @@ article {
   line-height: 1.2rem;
 }
 
+.undefined {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
 footer {
   width: 100%;
   text-align: center;
