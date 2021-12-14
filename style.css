@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #fdfdfd;
+}
+
+header {
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+section {
+  height: 15rem;
+  width: 100%;
+  position: relative;
+}
+
+.back-cl {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to top right, #ff5400, #ff9e00, transparent);
+  background: -webkit-linear-gradient(
+    to top right,
+    #ff5400,
+    #ff9e00,
+    transparent
+  );
+  background: -mozlinear-gradient(to top right, #ff5400, #ff9e00, transparent);
+  background: -ms-linear-gradient(to top right, #ff5400, #ff9e00, transparent);
+}
+
+.back-pt {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(./back_gimp.png);
+  background-size: 5%;
+  filter: blur(1px);
+}
+
+#autocomplete {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* height: 100%;
+  width: 100%; */
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+input {
+  padding: 0 0.5rem;
+  height: 2.2rem;
+  width: auto;
+  line-height: 2.2rem;
+  font-size: 1.3rem;
+  border: none;
+  outline: 0;
+  border-bottom: 1px solid #333;
+  background-color: transparent;
+  text-align: center;
+}
+
+input:focus {
+  background-color: rgba(255, 255, 255, 0.664);
+}
+
+article {
+  width: 100%;
+  font-size: 0.8rem;
+}
+
+.results > a {
+  width: 95%;
+  margin: 1rem auto;
+  padding: 0.5rem 0.5rem;
+  display: flex;
+  border: 1px solid #33333342;
+  /* width:30% */
+}
+
+.results img {
+  width: 40%;
+  max-width: 400px;
+  max-height: 250px;
+}
+
+.contents {
+  margin: 0 0.5rem;
+  line-height: 1.2rem;
+}
+
+footer {
+  width: 100%;
+  text-align: center;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.7rem;
+}
+
+/* Normal */
+@media (max-width: 1200px) {
+}
+
+/* Tablet */
+@media (max-width: 890px) {
+}
+
+/* Smartphone */
+@media (max-width: 500px) {
+}
