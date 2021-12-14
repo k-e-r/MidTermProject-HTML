@@ -43,7 +43,7 @@ const createAutoComplete = () => {
             ? 'https://placehold.jp/400x250.png'
             : item.images.recommended_url;
         const url =
-          item.official_site_url === ''
+          item.official_site_url == ''
             ? '-'
             : '<a href="' +
               item.official_site_url +
