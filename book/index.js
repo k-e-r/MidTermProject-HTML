@@ -189,7 +189,7 @@ createHeroImage = async () => {
     ranking.appendChild(title);
     for (let item of items) {
       const option = document.createElement('a');
-      option.className = 'rankingBooks';
+      option.className = 'rankingItems';
       option.setAttribute('data-id', item.Item.title);
       option.onclick = async function () {
         // memo: Redeclaration... I want to delete it.

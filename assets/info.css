@@ -1,0 +1,180 @@
+body {
+  color: #333;
+  background-color: #ffffff85;
+  counter-reset: ranking;
+}
+
+header h1 {
+  cursor: pointer;
+}
+
+a {
+  cursor: pointer;
+}
+
+input {
+  color: #333;
+  border-bottom: 1px solid #333;
+}
+
+.book svg {
+  fill: #4444449f;
+}
+
+.game svg {
+  fill: #4444449f;
+}
+
+.rankingItems {
+  display: flex;
+  position: relative;
+}
+
+.rankingItems > .contents {
+  width: 100%;
+  margin: 0.5rem;
+  line-height: 1.2rem;
+  font-size: 0.8rem;
+}
+
+article {
+  display: flex;
+}
+
+.ranking {
+  padding-left: 1rem;
+  width: 35%;
+}
+
+.results {
+  width: 65%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.results > a {
+  width: auto;
+  flex-direction: column;
+}
+
+.results > a > img {
+  width: 10rem;
+}
+
+.contents {
+  width: 10.5rem;
+}
+
+.bookDetails {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.bookDetails > img {
+  width: 10.5rem;
+  height: auto;
+}
+
+.details {
+  word-break: break-all;
+  white-space: normal;
+  margin: 0 1rem 1rem 1rem;
+  line-height: 1.5rem;
+}
+
+.details > p:nth-child(1) {
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1.6rem;
+}
+
+.details > p:nth-child(2) {
+  margin-bottom: 0.5rem;
+}
+
+.details > p:nth-child(3) {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.6rem;
+}
+
+.details > p:nth-child(4) {
+  margin-bottom: 0.5rem;
+}
+
+.details > p > a {
+  text-decoration: none;
+  color: #818181;
+}
+
+/* ranking */
+.r-contents {
+  height: 3rem;
+  margin: 0 1rem 0 0.4rem;
+  display: flex;
+  align-items: center;
+}
+
+.r-contents p {
+  line-height: 1.2rem;
+  margin: 0.5rem 0 0.5rem 1rem;
+  width: 85%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ranking-item:nth-of-type(1) .order,
+.ranking-item:nth-of-type(2) .order,
+.ranking-item:nth-of-type(3) .order {
+  border: none;
+  color: #fff;
+  font-weight: normal;
+}
+
+.ranking-item:nth-of-type(1) .order {
+  background-color: #dab413;
+}
+
+.ranking-item:nth-of-type(2) .order {
+  background-color: #6e7b84;
+}
+
+.ranking-item:nth-of-type(3) .order {
+  background-color: #a0541a;
+}
+
+.ranking-item .order::before {
+  content: counter(ranking);
+  counter-increment: ranking;
+  font-size: 1rem;
+}
+
+/* Normal */
+@media (max-width: 1200px) {
+  /* ranking */
+  .r-contents p {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    margin: 0.5rem 0 0.5rem 1rem;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+/* Tablet */
+@media (max-width: 890px) {
+  .results {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .ranking {
+    display: none !important;
+  }
+}
