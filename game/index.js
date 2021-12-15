@@ -133,7 +133,7 @@ showRanking = async () => {
   s_ranking.innerHTML = '';
   const title = document.createElement('div');
   title.className = 'rankingTitle';
-  title.innerHTML = '<h2>Sales Ranking (Total)</h2>';
+  title.innerHTML = '<h2 class="total">Sales Ranking (Total)</h2>';
   s_ranking.appendChild(title);
   for (let item of items) {
     const option = document.createElement('a');
@@ -151,7 +151,6 @@ showRanking = async () => {
         .querySelector('#autocomplete')
         .querySelector('input');
       input.value = item.Item.title;
-      // bookDetails(item);
       onInput('', input.value);
     };
   }
@@ -204,7 +203,7 @@ createHeroImageSwitch = async () => {
   const ranking = document.querySelector('#ranking-container');
   const title = document.createElement('div');
   title.className = 'rankingTitle';
-  title.innerHTML = '<h2 class="total">Sales Ranking (Nintendo Switch)</h2>';
+  title.innerHTML = '<h2 class="sw">Sales Ranking (Nintendo Switch)</h2>';
   ranking.appendChild(title);
 
   const lists = await searchGames('', 'sales', 3, '006514');

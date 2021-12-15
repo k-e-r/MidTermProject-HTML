@@ -219,7 +219,7 @@ article {
 /* ranking */
 .r-contents {
   height: 3rem;
-  margin-left: 0.4rem;
+  margin: 0 1rem 0 0.4rem;
   display: flex;
   align-items: center;
 }
@@ -228,6 +228,9 @@ article {
   line-height: 1.2rem;
   margin: 0.5rem 0 0.5rem 1rem;
   width: 85%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .order {
@@ -286,10 +289,29 @@ footer {
 
 /* Normal */
 @media (max-width: 1200px) {
+  /* ranking */
+  .r-contents p {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    margin: 0.5rem 0 0.5rem 1rem;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }
 
 /* Tablet */
 @media (max-width: 890px) {
+  .results {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .ranking {
+    display: none !important;
+  }
 }
 
 /* Smartphone */
@@ -309,14 +331,20 @@ footer {
     font-size: 0.8rem;
   }
 
+  .game svg {
+    position: absolute;
+    width: 23px;
+    height: 23px;
+    right: 0;
+    margin-right: 1rem;
+  }
+
   .book svg {
     position: absolute;
     width: 23px;
     height: 23px;
     right: 0;
     margin-right: 1rem;
-    opacity: 1;
-    fill: #ffffff85;
   }
 
   .results > a {
