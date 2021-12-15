@@ -10,6 +10,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
   background-color: #ffffff85;
+  counter-reset: ranking;
 }
 
 header {
@@ -43,7 +44,7 @@ input:focus {
   width: 90%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin: 0 auto;
 }
 
@@ -117,17 +118,15 @@ article {
 }
 
 .ranking {
-  width: 30%;
-  height: 100%;
-  border: solid 1px #333;
+  padding-left: 1rem;
+  width: 35%;
 }
 
 .results {
-  width: 70%;
+  width: 65%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  border: solid 1px #333;
+  /* justify-content: space-between; */
 }
 
 .results > a {
@@ -171,6 +170,85 @@ article {
   white-space: normal;
   margin: 0 1rem 1rem 1rem;
   line-height: 1.5rem;
+}
+
+.details > p:nth-child(1) {
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1.6rem;
+}
+
+.details > p:nth-child(2) {
+  margin-bottom: 0.5rem;
+}
+
+.details > p:nth-child(3) {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.6rem;
+}
+
+.details > p:nth-child(4) {
+  margin-bottom: 0.5rem;
+}
+
+.details > p > a {
+  text-decoration: none;
+  color: #818181;
+}
+
+/* ranking */
+.r-contents {
+  height: 3rem;
+  margin-left: 0.4rem;
+  display: flex;
+  align-items: center;
+}
+
+.r-contents p {
+  line-height: 1.2rem;
+  margin: 0.5rem 0 0.5rem 1rem;
+  width: 85%;
+}
+
+.order {
+  /* display: inline-block; */
+  width: 15%;
+  height: 1.5rem;
+  margin: 0 10px;
+  color: #aaa;
+  border: 1px solid #ccc;
+  vertical-align: 20px;
+  text-align: center;
+  font-weight: bold;
+  line-height: 1.5rem;
+}
+
+.ranking-item:nth-of-type(1) .order,
+.ranking-item:nth-of-type(2) .order,
+.ranking-item:nth-of-type(3) .order {
+  border: none;
+  color: #fff;
+  font-weight: normal;
+}
+
+.ranking-item:nth-of-type(1) .order {
+  background-color: #dab413;
+}
+
+.ranking-item:nth-of-type(2) .order {
+  background-color: #6e7b84;
+}
+
+.ranking .ranking-item:nth-of-type(3) .order {
+  background-color: #a0541a;
+}
+
+.ranking-item .order::before {
+  content: counter(ranking);
+  counter-increment: ranking;
+  /* display: inline-block; */
+  font-size: 1rem;
 }
 
 .undefined {

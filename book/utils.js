@@ -38,6 +38,7 @@ const searchBooks = async (keyword, sortVal = '-releaseDate', hitsVal = 30) => {
           affiliateId: '0ab15da8.13a0f7f4.0ab15da9.075fbfdf',
           hits: hitsVal, // max 30
           sort: sortVal,
+          // outOfStockFlag: 1,
         },
       }
     );

@@ -45,6 +45,7 @@ const onInput = async (event, title = '') => {
         };
       }
     }
+    showRanking();
   } else {
     ranking.style.display = 'flex';
     results.innerHTML = '';
@@ -80,7 +81,7 @@ bookDetails = (info) => {
         case '6':
           return 'Check with the manufacturer for availability';
         default:
-          return 'default';
+          return 'Out of stock';
       }
     };
 
@@ -96,6 +97,10 @@ bookDetails = (info) => {
           return '';
       }
     };
+    const url =
+      item.affiliateUrl === ''
+        ? '-'
+        : '<a href="' + item.affiliateUrl + '" target="_blank">Rakuten</a>';
 
     option.innerHTML = `
       <img src="${image}" />
@@ -111,10 +116,41 @@ bookDetails = (info) => {
         <br />
         <p>Availability: ${availability(item.availability)}</p>
         <p>Postage: ${postage(item.postageFlag)}</p>
-        <p>URL: ${item.affiliateUrl}</p>
+        <p>Purchase URL: ${url}</p>
       </div>
     `;
     results.appendChild(option);
+  }
+};
+
+showRanking = async () => {
+  const ranking = document.querySelector('.ranking');
+  const lists = await searchBooks('', 'sales', 10);
+  const items = lists.Items;
+  ranking.innerHTML = '';
+  const title = document.createElement('div');
+  title.className = 'rankingTitle';
+  title.innerHTML = '<h2>Sales Ranking (Comic)</h2>';
+  ranking.appendChild(title);
+  for (let item of items) {
+    const option = document.createElement('a');
+    option.className = 'ranking-item';
+    option.innerHTML = `
+      <div class="r-contents">
+        <span class="order"></span>
+        <p>${item.Item.title}</p>
+      </div>
+    `;
+    ranking.appendChild(option);
+    option.onclick = function () {
+      // memo: Redeclaration... I want to delete it.
+      const input = document
+        .querySelector('#autocomplete')
+        .querySelector('input');
+      input.value = item.Item.title;
+      // bookDetails(item);
+      onInput('', input.value);
+    };
   }
 };
 
