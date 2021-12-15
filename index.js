@@ -89,7 +89,7 @@ createHeroImage = async () => {
     const barIn = document.createElement('div');
     slide.appendChild(barOut);
     barIn.id = 'progressBarIn';
-    barIn.style.transition = 'all ' + timeValue + 'ms linear';
+    barIn.style.animationDuration = timeValue + 'ms';
     slide.appendChild(barIn);
   } else slide.innerHTML = '';
   timerSet();
@@ -104,22 +104,20 @@ const showSlides = () => {
     slideIndex = 1;
   }
   slides[0].style.marginLeft = '-' + (slideIndex - 1) + '00%';
-
-  // progress
-  const bar = document.querySelector('#progressBarIn');
-  // bar.style.width = '100%';
-  bar.classList.toggle('active');
 };
 
 let time = 0;
 const timerSet = (sw = 'on') => {
   const slide = document.querySelector('#slideshow-container');
+  const bar = document.querySelector('#progressBarIn');
   if (sw === 'on') {
     slide.style.display = 'inline-block';
     time = setInterval(showSlides, timeValue);
+    bar.classList.add('active');
   } else {
     slide.style.display = 'none';
     clearInterval(time);
+    bar.classList.remove('active');
   }
 };
 

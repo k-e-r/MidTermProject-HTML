@@ -71,12 +71,23 @@ input:focus {
   height: 0.4rem;
   position: absolute;
   bottom: 0;
-  background: #c51a1ab7;
-  /* transition: all 8s linear; */
+  background: #d8d8d8b7;
+  /* animation duration is set by JS */
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
 #progressBarIn.active {
-  width: 100%;
+  animation-name: slide;
+}
+
+@keyframes slide {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 article {
