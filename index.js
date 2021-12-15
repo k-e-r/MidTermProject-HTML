@@ -1,7 +1,7 @@
 const onInput = async (event, title = '') => {
   const checkValue = title === '' ? event.target.value : title;
   const lists = await searchTitle(checkValue);
-  const results = document.querySelector('#contents').querySelector('.results');
+  const results = document.querySelector('.results');
   if (lists.total_count === 0) {
     const option = document.createElement('a');
     results.innerHTML = '';
@@ -60,7 +60,8 @@ createAutoComplete = () => {
 
 createHeroImage = async () => {
   const slide = document.querySelector('#slideshow-container');
-  const lists = await searchSeason('2021-winter');
+  // const lists = await searchSeason('2021-winter');
+  const lists = await searchSeason(checkSeason());
 
   if (lists != []) {
     const items = lists.works;
@@ -84,6 +85,7 @@ createHeroImage = async () => {
         slide.appendChild(option);
       }
     }
+    // progress bar
     const barOut = document.createElement('div');
     barOut.id = 'progressBarOut';
     const barIn = document.createElement('div');
@@ -91,17 +93,35 @@ createHeroImage = async () => {
     barIn.id = 'progressBarIn';
     barIn.style.animationDuration = timeValue + 'ms';
     slide.appendChild(barIn);
+
+    // slide btn
+    const btnPrev = document.createElement('a');
+    btnPrev.className = 'prev';
+    btnPrev.onclick = () => {
+      showSlides('prev');
+      timerSet('restart');
+    };
+    slide.appendChild(btnPrev);
+    const btnNext = document.createElement('a');
+    btnNext.className = 'next';
+    btnNext.onclick = () => {
+      showSlides('next');
+      timerSet('restart');
+    };
+    slide.appendChild(btnNext);
   } else slide.innerHTML = '';
   timerSet();
   showSlides();
 };
 const timeValue = 8000;
 let slideIndex = 0;
-const showSlides = () => {
-  const slides = document.getElementsByClassName('switchSlides');
-  slideIndex++;
+const showSlides = (stat = '') => {
+  const slides = document.querySelectorAll('.switchSlides');
+  stat === 'prev' ? slideIndex-- : slideIndex++;
   if (slideIndex > slides.length) {
     slideIndex = 1;
+  } else if (slideIndex <= 0) {
+    slideIndex = slides.length;
   }
   slides[0].style.marginLeft = '-' + (slideIndex - 1) + '00%';
 };
@@ -114,12 +134,19 @@ const timerSet = (sw = 'on') => {
     slide.style.display = 'inline-block';
     time = setInterval(showSlides, timeValue);
     bar.classList.add('active');
+  } else if (sw === 'restart') {
+    bar.classList.remove('active');
+    clearInterval(time);
+    setTimeout(() => {
+      bar.classList.add('active');
+    }, 1);
+    time = setInterval(showSlides, timeValue);
   } else {
     slide.style.display = 'none';
     clearInterval(time);
-    // bar.classList.remove('active');
   }
 };
 
 createAutoComplete();
 createHeroImage();
+checkSeason();

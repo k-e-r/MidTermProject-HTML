@@ -10,6 +10,16 @@ const debounce = (func, delay = 1000) => {
   };
 };
 
+const checkSeason = () => {
+  const winter = Array(3).fill('winter');
+  const spring = Array(3).fill('spring');
+  const summer = Array(3).fill('summer');
+  const autumn = Array(3).fill('autumn');
+  const season = winter.concat(spring, summer, autumn);
+  const date = new Date();
+  return date.getFullYear() + '-' + season[date.getMonth()];
+};
+
 const searchTitle = async (title) => {
   const response = await axios.get('https://api.annict.com/v1/works', {
     params: {
