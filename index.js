@@ -3,6 +3,8 @@ const onInput = async (event, title = '') => {
   const lists = await searchTitle(checkValue);
   const results = document.querySelector('.results');
   if (lists.total_count === 0) {
+    timerSet('off');
+
     const option = document.createElement('a');
     results.innerHTML = '';
     option.innerHTML = `
@@ -10,9 +12,10 @@ const onInput = async (event, title = '') => {
         <p>"${event.target.value}" is UNDEFINED</p>
       </div>
     `;
-    timerSet('off');
     results.appendChild(option);
   } else if (lists != []) {
+    timerSet('off');
+
     const items = lists.works;
     results.innerHTML = '';
     for (let item of items) {
@@ -40,13 +43,12 @@ const onInput = async (event, title = '') => {
             <p>Official site URL: ${url}</p>
           </div>
         `;
-        timerSet('off');
         results.appendChild(option);
       }
     }
   } else {
-    results.innerHTML = '';
     timerSet();
+    results.innerHTML = '';
   }
 };
 
@@ -113,6 +115,8 @@ createHeroImage = async () => {
   timerSet();
   showSlides();
 };
+
+// time for slide changing
 const timeValue = 8000;
 let slideIndex = 0;
 const showSlides = (stat = '') => {
@@ -149,4 +153,3 @@ const timerSet = (sw = 'on') => {
 
 createAutoComplete();
 createHeroImage();
-checkSeason();
