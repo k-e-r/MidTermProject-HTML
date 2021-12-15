@@ -1,34 +1,18 @@
-createAutoComplete = () => {
-  document.querySelector('#autocomplete').innerHTML = `
-    <label><input class="input" placeholder="ラブひな" /></label>
-  `;
-  const input = document.querySelector('#autocomplete').querySelector('input');
-  const onInput = async (event) => {
-    const lists = await searchTitle(event.target.value);
-    const results = document
-      .querySelector('#contents')
-      .querySelector('.results');
-    if (lists.total_count === 0) {
-      const option = document.createElement('a');
-      results.innerHTML = '';
-      option.innerHTML = `
-        <div class="undefined">
-          <p>"${event.target.value}" is UNDEFINED</p>
-        </div>
-      `;
-      let slides = document.getElementsByClassName('switchSlides');
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = 'none';
-      }
-      results.appendChild(option);
-    } else outputResult(lists);
-  };
-  input.addEventListener('input', debounce(onInput, 500));
-};
-
-outputResult = (lists) => {
+const onInput = async (event, title = '') => {
+  const checkValue = title === '' ? event.target.value : title;
+  const lists = await searchTitle(checkValue);
   const results = document.querySelector('#contents').querySelector('.results');
-  if (lists != []) {
+  if (lists.total_count === 0) {
+    const option = document.createElement('a');
+    results.innerHTML = '';
+    option.innerHTML = `
+      <div class="undefined">
+        <p>"${event.target.value}" is UNDEFINED</p>
+      </div>
+    `;
+    timerSet('off');
+    results.appendChild(option);
+  } else if (lists != []) {
     const items = lists.works;
     results.innerHTML = '';
     for (let item of items) {
@@ -56,20 +40,22 @@ outputResult = (lists) => {
             <p>Official site URL: ${url}</p>
           </div>
         `;
-        let slides = document.getElementsByClassName('switchSlides');
-        for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = 'none';
-        }
+        timerSet('off');
         results.appendChild(option);
       }
     }
   } else {
     results.innerHTML = '';
-    let slides = document.getElementsByClassName('switchSlides');
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = 'block';
-    }
+    timerSet();
   }
+};
+
+createAutoComplete = () => {
+  document.querySelector('#autocomplete').innerHTML = `
+    <label><input class="input" placeholder="ラブひな" /></label>
+  `;
+  const input = document.querySelector('#autocomplete').querySelector('input');
+  input.addEventListener('input', debounce(onInput, 500));
 };
 
 createHeroImage = async () => {
@@ -82,40 +68,59 @@ createHeroImage = async () => {
     for (let item of items) {
       if (item.images.recommended_url !== '') {
         const option = document.createElement('a');
+        option.className = 'switchSlides';
         option.setAttribute('data-id', item.title);
         option.onclick = async function () {
+          // memo: Redeclaration... I want to delete it.
           const input = document
             .querySelector('#autocomplete')
             .querySelector('input');
           input.value = this.dataset.id;
-          const lists = await searchTitle(this.dataset.id);
-          outputResult(lists);
+          onInput('', this.dataset.id);
         };
         option.innerHTML = `
-          <div class="showSlides">
-            <img class="switchSlides" src="${item.images.recommended_url}" />
-          </div>
+          <img src="${item.images.recommended_url}" />
         `;
         slide.appendChild(option);
       }
     }
+    const barOut = document.createElement('div');
+    barOut.id = 'progressBarOut';
+    const barIn = document.createElement('div');
+    slide.appendChild(barOut);
+    barIn.id = 'progressBarIn';
+    barIn.style.transition = 'all ' + timeValue + 'ms linear';
+    slide.appendChild(barIn);
   } else slide.innerHTML = '';
+  timerSet();
   showSlides();
 };
-
+const timeValue = 8000;
 let slideIndex = 0;
-showSlides = () => {
-  let i;
-  let slides = document.getElementsByClassName('showSlides');
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = 'none';
-  }
+const showSlides = () => {
+  const slides = document.getElementsByClassName('switchSlides');
   slideIndex++;
   if (slideIndex > slides.length) {
     slideIndex = 1;
   }
-  slides[slideIndex - 1].style.display = 'block';
-  setTimeout(showSlides, 8000);
+  slides[0].style.marginLeft = '-' + (slideIndex - 1) + '00%';
+
+  // progress
+  const bar = document.querySelector('#progressBarIn');
+  // bar.style.width = '100%';
+  bar.classList.toggle('active');
+};
+
+let time = 0;
+const timerSet = (sw = 'on') => {
+  const slide = document.querySelector('#slideshow-container');
+  if (sw === 'on') {
+    slide.style.display = 'inline-block';
+    time = setInterval(showSlides, timeValue);
+  } else {
+    slide.style.display = 'none';
+    clearInterval(time);
+  }
 };
 
 createAutoComplete();
