@@ -25,7 +25,6 @@ const searchBooks = async (keyword, sortVal = '-releaseDate', hitsVal = 30) => {
       }
     );
 
-    console.log(response.data);
     return response.data;
   } else {
     const response = await axios.get(

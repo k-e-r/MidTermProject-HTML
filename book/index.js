@@ -1,9 +1,12 @@
 const onInput = async (event, title = '') => {
-  const checkValue = title === '' ? event.target.value : title;
+  const checkValue =
+    title === '' ? (event === '' ? '' : event.target.value) : title;
   const ranking = document.querySelector('#ranking-container');
   const results = document.querySelector('.results');
+  const s_ranking = document.querySelector('.ranking');
   if (checkValue !== '') {
     ranking.style.display = 'none';
+    s_ranking.style.display = 'block';
     const lists = await searchBooks(checkValue);
     if (lists.hits === 0) {
       const option = document.createElement('a');
@@ -49,6 +52,7 @@ const onInput = async (event, title = '') => {
   } else {
     ranking.style.display = 'flex';
     results.innerHTML = '';
+    s_ranking.style.display = 'none';
   }
 };
 
@@ -124,14 +128,14 @@ bookDetails = (info) => {
 };
 
 showRanking = async () => {
-  const ranking = document.querySelector('.ranking');
+  const s_ranking = document.querySelector('.ranking');
   const lists = await searchBooks('', 'sales', 10);
   const items = lists.Items;
-  ranking.innerHTML = '';
+  s_ranking.innerHTML = '';
   const title = document.createElement('div');
   title.className = 'rankingTitle';
   title.innerHTML = '<h2>Sales Ranking (Comic)</h2>';
-  ranking.appendChild(title);
+  s_ranking.appendChild(title);
   for (let item of items) {
     const option = document.createElement('a');
     option.className = 'ranking-item';
@@ -141,7 +145,7 @@ showRanking = async () => {
         <p>${item.Item.title}</p>
       </div>
     `;
-    ranking.appendChild(option);
+    s_ranking.appendChild(option);
     option.onclick = function () {
       // memo: Redeclaration... I want to delete it.
       const input = document
@@ -160,6 +164,16 @@ createAutoComplete = () => {
   `;
   const input = document.querySelector('#autocomplete').querySelector('input');
   input.addEventListener('input', debounce(onInput, 500));
+
+  const logo = document.querySelector('h1');
+  logo.onclick = async () => {
+    // memo: Redeclaration... I want to delete it.
+    const input = document
+      .querySelector('#autocomplete')
+      .querySelector('input');
+    input.value = '';
+    onInput('', '');
+  };
 };
 
 createHeroImage = async () => {
