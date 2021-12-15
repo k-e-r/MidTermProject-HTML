@@ -117,7 +117,7 @@ const timerSet = (sw = 'on') => {
   } else {
     slide.style.display = 'none';
     clearInterval(time);
-    bar.classList.remove('active');
+    // bar.classList.remove('active');
   }
 };
 
