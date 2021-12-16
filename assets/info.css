@@ -8,6 +8,10 @@ header h1 {
   cursor: pointer;
 }
 
+#autocomplete {
+  width: 40%;
+}
+
 a {
   cursor: pointer;
 }
@@ -78,36 +82,30 @@ article {
 }
 
 .details {
+  width: 100%;
+  margin: 1rem 2rem;
+  display: flex;
+}
+
+.details > img {
+  /* max-width: 10rem; */
+}
+
+.details > div {
+  margin: 0 1rem;
+}
+
+/* .details {
   word-break: break-all;
   white-space: normal;
   margin: 0 1rem 1rem 1rem;
   line-height: 1.5rem;
 }
 
-.details > p:nth-child(1) {
-  font-size: 1.2rem;
-  font-weight: bold;
-  line-height: 1.6rem;
-}
-
-.details > p:nth-child(2) {
-  margin-bottom: 0.5rem;
-}
-
-.details > p:nth-child(3) {
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.6rem;
-}
-
-.details > p:nth-child(4) {
-  margin-bottom: 0.5rem;
-}
-
 .details > p > a {
   text-decoration: none;
   color: #818181;
-}
+} */
 
 /* ranking */
 .r-contents {

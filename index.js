@@ -1,4 +1,4 @@
-const onInput = async (event, title = '') => {
+onInput = async (event, title = '') => {
   const checkValue = title === '' ? event.target.value : title;
   const lists = await searchTitle(checkValue);
   const results = document.querySelector('.results');
@@ -119,7 +119,7 @@ createHeroImage = async () => {
 // time for slide changing
 const timeValue = 8000;
 let slideIndex = 0;
-const showSlides = (stat = '') => {
+showSlides = (stat = '') => {
   const slides = document.querySelectorAll('.switchSlides');
   stat === 'prev' ? slideIndex-- : slideIndex++;
   if (slideIndex > slides.length) {
@@ -131,7 +131,7 @@ const showSlides = (stat = '') => {
 };
 
 let time = 0;
-const timerSet = (sw = 'on') => {
+timerSet = (sw = 'on') => {
   const slide = document.querySelector('#slideshow-container');
   const bar = document.querySelector('#progressBarIn');
   if (sw === 'on') {
