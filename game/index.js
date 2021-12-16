@@ -4,7 +4,48 @@ onInput = async (event, title = '') => {
   const ranking = document.querySelector('#ranking-container');
   const results = document.querySelector('.results');
   const s_ranking = document.querySelector('.ranking');
-  if (checkValue !== '') {
+  if (checkValue === '地下室の怪人') {
+    console.log('Yoshino');
+    const item = {
+      Item: {
+        title: '地下室の怪人',
+        label: 'Yoshino Yayama',
+        salesDate: '2021年12月17日',
+        hardware: 'Windows PC',
+        jan: '0123456789',
+        affiliateUrl: "Yoshino's site",
+        reviewAverage: '5',
+        availability: '1',
+        largeImageUrl: 'https://placehold.jp/200x200.png',
+      },
+    };
+    ranking.style.display = 'none';
+    s_ranking.style.display = 'block';
+    results.innerHTML = '';
+    const option = document.createElement('a');
+    const image =
+      item.Item.largeImageUrl === ''
+        ? 'https://placehold.jp/200x200.png'
+        : item.Item.largeImageUrl;
+
+    option.innerHTML = `
+        <img src="${image}" />
+        <div class="contents">
+          <p class="title">${item.Item.title}</p>
+          <p class="maker">${item.Item.label}</p>
+          <p class="salesDate">${item.Item.salesDate}</p>
+        </div>
+      `;
+    results.appendChild(option);
+    option.onclick = function () {
+      // memo: Redeclaration... I want to delete it.
+      const input = document
+        .querySelector('#autocomplete')
+        .querySelector('input');
+      input.value = item.Item.title;
+      showItems(item, apiData.games.genreId.game);
+    };
+  } else if (checkValue !== '') {
     ranking.style.display = 'none';
     s_ranking.style.display = 'block';
     const lists = await searchItems(

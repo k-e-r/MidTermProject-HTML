@@ -55,7 +55,7 @@ showRanking = async (genre, kind) => {
         .querySelector('input');
       input.value = item.Item.title;
       // onInput('', input.value);
-      showItems(item, apiData.books.genreId.comic);
+      showItems(item, genre);
     };
   }
 };
@@ -196,7 +196,9 @@ showItems = (info, genre) => {
     genre,
     (kind =
       apiData.books.genreName[genre] === undefined
-        ? apiData.games.genreName[genre]
+        ? apiData.games.genreName[genre] === undefined
+          ? apiData.anime.genreName[genre]
+          : apiData.games.genreName[genre]
         : apiData.books.genreName[genre])
   );
 };
