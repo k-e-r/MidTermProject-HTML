@@ -82,6 +82,7 @@ article {
 
 .resLists {
   width: 10rem;
+  cursor: pointer;
 }
 
 .contents {
