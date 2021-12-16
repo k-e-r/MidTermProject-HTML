@@ -5,18 +5,18 @@ onInput = async (event, title = '') => {
   const results = document.querySelector('.results');
   const s_ranking = document.querySelector('.ranking');
   if (checkValue === '地下室の怪人') {
-    console.log('Yoshino');
     const item = {
       Item: {
         title: '地下室の怪人',
         label: 'Yoshino Yayama',
         salesDate: '2021年12月17日',
-        hardware: 'Windows PC',
+        hardware: 'Windows PC(Me/98/95) / iMac',
         jan: '0123456789',
-        affiliateUrl: "Yoshino's site",
+        affiliateUrl:
+          'https://yoshino9397.github.io/TrainProject/HTML/index.html',
         reviewAverage: '5',
         availability: '1',
-        largeImageUrl: 'https://placehold.jp/200x200.png',
+        largeImageUrl: 'https://placehold.jp/100x160.png',
       },
     };
     ranking.style.display = 'none';
@@ -25,7 +25,7 @@ onInput = async (event, title = '') => {
     const option = document.createElement('a');
     const image =
       item.Item.largeImageUrl === ''
-        ? 'https://placehold.jp/200x200.png'
+        ? 'https://placehold.jp/100x160.png'
         : item.Item.largeImageUrl;
 
     option.innerHTML = `
@@ -45,6 +45,10 @@ onInput = async (event, title = '') => {
       input.value = item.Item.title;
       showItems(item, apiData.games.genreId.game);
     };
+    showRanking(
+      apiData.games.genreId.game,
+      apiData.games.genreName[apiData.games.genreId.game]
+    );
   } else if (checkValue !== '') {
     ranking.style.display = 'none';
     s_ranking.style.display = 'block';

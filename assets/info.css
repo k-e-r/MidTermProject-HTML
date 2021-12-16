@@ -260,6 +260,10 @@ article {
   border-bottom: solid 0.5rem #a2d2ff;
 }
 
+.ranking .rankLine0 {
+  border-bottom: solid 0.5rem #ffbc06d5;
+}
+
 .rankLine1 {
   border-bottom: solid 0.5rem #bdfefe;
 }

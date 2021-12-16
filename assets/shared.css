@@ -15,6 +15,11 @@ header {
   font-size: 1.4rem;
   line-height: 2.2rem;
   display: flex;
+  top: 0;
+  position: sticky;
+  background-color: #ffffffc2;
+  backdrop-filter: blur(5px);
+  z-index: 10;
 }
 
 input {
@@ -83,7 +88,7 @@ article {
 footer {
   width: 100%;
   text-align: center;
-  margin-top: 0.4rem;
+  margin: 0.6rem 0 0.4rem;
   font-size: 0.7rem;
 }
 
