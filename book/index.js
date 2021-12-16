@@ -31,7 +31,7 @@ onInput = async (event, title = '') => {
           <img src="${image}" />
           <div class="contents">
             <p class="title">${item.Item.title}</p>
-            <p class="author">${item.Item.author}</p>
+            <p class="maker">${item.Item.author}</p>
             <p class="salesDate">${item.Item.salesDate}</p>
           </div>
         `;
@@ -46,7 +46,10 @@ onInput = async (event, title = '') => {
         };
       }
     }
-    showRanking(apiData.books.genreId.comic, 'Comic');
+    showRanking(
+      apiData.books.genreId.comic,
+      apiData.books.genreName[apiData.books.genreId.comic]
+    );
   } else {
     ranking.style.display = 'flex';
     results.innerHTML = '';
@@ -58,5 +61,7 @@ createAutoComplete('よつばと!');
 const booksRankGenre = [
   apiData.books.genreId.comic,
   apiData.books.genreId.lnovel,
+  apiData.books.genreId.novel,
+  apiData.books.genreId.art,
 ];
 createHeroRanking(booksRankGenre);

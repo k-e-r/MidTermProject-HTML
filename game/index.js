@@ -36,10 +36,9 @@ onInput = async (event, title = '') => {
         option.innerHTML = `
           <img src="${image}" />
           <div class="contents">
-            <p>Title : ${item.Item.title}</p>
-            <p>Hardware : ${item.Item.hardware}</p>
-            <p>Publisher : ${item.Item.label}</p>
-            <p>Sales Date: ${item.Item.salesDate}</p>
+            <p class="title">${item.Item.title}</p>
+            <p class="maker">${item.Item.label}</p>
+            <p class="salesDate">${item.Item.salesDate}</p>
           </div>
         `;
         results.appendChild(option);
@@ -53,7 +52,10 @@ onInput = async (event, title = '') => {
         };
       }
     }
-    showRanking(apiData.games.genreId.game, 'Total');
+    showRanking(
+      apiData.games.genreId.game,
+      apiData.games.genreName[apiData.games.genreId.game]
+    );
   } else {
     ranking.style.display = 'flex';
     results.innerHTML = '';

@@ -15,10 +15,14 @@ const apiData = {
     genreId: {
       comic: '001001',
       lnovel: '001017',
+      novel: '001003001002',
+      art: '001009009007',
     },
     genreName: {
       '001001': 'Comic',
       '001017': 'Light Novel',
+      '001003001002': "Children's Novel",
+      '001009009007': 'Drawing',
     },
   },
   games: {
@@ -46,7 +50,9 @@ const searchItems = async (
 ) => {
   const url =
     genreId === apiData.books.genreId.comic ||
-    genreId === apiData.books.genreId.lnovel
+    genreId === apiData.books.genreId.lnovel ||
+    genreId === apiData.books.genreId.novel ||
+    genreId === apiData.books.genreId.art
       ? apiData.general.url.books
       : apiData.general.url.games;
   if (keyword === '') {

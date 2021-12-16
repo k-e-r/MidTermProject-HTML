@@ -6,7 +6,6 @@ const debounce = (func, delay = 1000) => {
     }
     timeoutId = setTimeout(() => {
       func.apply(null, args);
-      console.log('args:' + args);
     }, delay);
   };
 };
@@ -33,6 +32,7 @@ showRanking = async (genre, kind) => {
   const s_ranking = document.querySelector('.ranking');
   const lists = await searchItems('', 'sales', genre, 10);
   const items = lists.Items;
+  s_ranking.style.display = 'block';
   s_ranking.innerHTML = '';
   const title = document.createElement('div');
   title.className = `rankingTitle`;
@@ -54,7 +54,8 @@ showRanking = async (genre, kind) => {
         .querySelector('#autocomplete')
         .querySelector('input');
       input.value = item.Item.title;
-      onInput('', input.value);
+      // onInput('', input.value);
+      showItems(item, apiData.books.genreId.comic);
     };
   }
 };
@@ -79,7 +80,6 @@ const availability = (a) => {
 };
 
 const checkRate = (r) => {
-  console.log('r:' + r);
   if (r >= 0 && r < 0.5) return '00';
   else if (r >= 0.5 && r < 1) return '05';
   else if (r >= 1 && r < 1.5) return '10';
@@ -96,11 +96,13 @@ const checkRate = (r) => {
 showItems = (info, genre) => {
   const ranking = document.querySelector('#ranking-container');
   const results = document.querySelector('.results');
+
   ranking.style.display = 'none';
   results.innerHTML = '';
   if (info !== '') {
     item = info.Item;
     const option = document.createElement('div');
+    const optionAdd = document.createElement('div');
     option.className = 'details';
     const image =
       item.largeImageUrl === ''
@@ -108,42 +110,76 @@ showItems = (info, genre) => {
         : item.largeImageUrl;
     const url = item.affiliateUrl === '' ? '-' : item.affiliateUrl;
     const rateVal = checkRate(parseFloat(item.reviewAverage).toFixed(1));
-    if (genre === apiData.books.genreId.comic) {
+    if (
+      genre === apiData.books.genreId.comic ||
+      genre === apiData.books.genreId.lnovel ||
+      genre === apiData.books.genreId.novel ||
+      genre === apiData.books.genreId.art
+    ) {
       option.innerHTML = `
         <img src="${image}" />
-        <div>
+        <div class="detailsCont">
           <p class="title">${item.title}</p>
-          <p class="author">${item.author}</p>
+          <p class="maker">${item.author}</p>
           <p class="review">
             <span class="rate rate${rateVal}"></span>
             ${item.reviewAverage}
-          </>
+          </p>
           <p class="category">${item.publisherName} > ${item.seriesName}</p>
           <br />
-          <p>${availability(item.availability)}</p>
+          <p class="status">${availability(item.availability)}</p>
           <a href="${url}" class="btn" target="_blank">PURCHASE</a>
+        </div>
+      `;
+      optionAdd.className = 'mDetails';
+      optionAdd.innerHTML = `
+        <div class="moreDetailsCont">
+          <p>Product Information</p>
+          <p class="desc">Sales Date </p><p class="data">: ${item.salesDate}</p>
+          <p class="desc">Author </p><p class="data">: ${item.author}</p>
+          <p class="desc">Label </p><p class="data">: ${item.seriesName}</p>
+          <p class="desc">Publisher </p><p class="data">: ${item.publisherName}</p>
+          <p class="desc">ISBN </p><p class="data">: ${item.isbn}</p>
         </div>
       `;
     } else {
       option.innerHTML = `
         <img src="${image}" />
-        <div class="details">
-          <p>Title : ${item.title}</p>
-          <p>Title Kana : ${item.titleKana}</p>
-          <p>Hardware : ${item.hardware}</p>
-          <p>Publisher : ${item.label}</p>
-          <p>JAN Code: ${item.jan}</p>
-          <p>Sales Date: ${item.salesDate}</p>
+        <div class="detailsCont">
+          <p class="title">${item.title}</p>
+          <p class="maker">${item.label}</p>
+          <p class="review">
+            <span class="rate rate${rateVal}"></span>
+            ${item.reviewAverage}
+          </p>
+          <p class="category">${item.hardware}</p>
           <br />
-          <p>Description: </p><p class="desc">${item.itemCaption}</p>
-          <br />
-          <p>Availability: ${availability(item.availability)}</p>
-          <p>Purchase URL: ${url}</p>
+          <p class="status">${availability(item.availability)}</p>
+          <a href="${url}" class="btn" target="_blank">PURCHASE</a>
+        </div>
+      `;
+      optionAdd.className = 'mDetails';
+      optionAdd.innerHTML = `
+        <div class="moreDetailsCont">
+          <p>Product Information</p>
+          <p class="desc">Sales Date </p><p class="data">: ${item.salesDate}</p>
+          <p class="desc">Label </p><p class="data">: ${item.label}</p>
+          <p class="desc">Hardware </p><p class="data">: ${item.hardware}</p>
+          <p class="desc">JAN </p><p class="data">: ${item.jan}</p>
         </div>
       `;
     }
     results.appendChild(option);
+    results.appendChild(optionAdd);
   }
+
+  showRanking(
+    genre,
+    (kind =
+      apiData.books.genreName[genre] === undefined
+        ? apiData.games.genreName[genre]
+        : apiData.books.genreName[genre])
+  );
 };
 
 createHeroRanking = async (genres) => {
@@ -172,7 +208,8 @@ createHeroRanking = async (genres) => {
           .querySelector('#autocomplete')
           .querySelector('input');
         input.value = this.dataset.id;
-        onInput('', this.dataset.id);
+        // onInput('', this.dataset.id);
+        showItems(item, genre);
       };
 
       if (genres[0] === apiData.books.genreId.comic) {
@@ -180,7 +217,7 @@ createHeroRanking = async (genres) => {
           <img src="${item.Item.largeImageUrl}" />
           <div class="contents">
             <p class="title">${item.Item.title}</p>
-            <p class="author">${item.Item.author}</p>
+            <p class="maker">${item.Item.author}</p>
             <p class="salesDate">${item.Item.salesDate}</p>
           </div>
         `;
@@ -188,10 +225,9 @@ createHeroRanking = async (genres) => {
         option.innerHTML = `
           <img src="${item.Item.largeImageUrl}" />
           <div class="contents">
-            <p>${item.Item.title}</p>
-            <p>${item.Item.hardware}</p>
-            <p>${item.Item.label}</p>
-            <p>${item.Item.salesDate}</p>
+            <p class="title">${item.Item.title}</p>
+            <p class="maker">${item.Item.label}</p>
+            <p class="salesDate">${item.Item.salesDate}</p>
           </div>
         `;
       }
