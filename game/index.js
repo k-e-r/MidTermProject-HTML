@@ -15,7 +15,7 @@ onInput = async (event, title = '') => {
       1
     );
     if (lists.hits === 0) {
-      const option = document.cfreateElement('a');
+      const option = document.createElement('a');
       results.innerHTML = '';
       option.innerHTML = `
         <div class="undefined">
