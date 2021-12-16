@@ -4,9 +4,7 @@ This is a web application created for the presentation of MidTerm.
 # DEMO
  https://k-e-r.github.io/MidTermProject-HTML/ <br/>
  // using Annict API DEMO Page <br/><br/>
- https://k-e-r.github.io/MidTermProject-HTML/book/index.html <br/>
- https://k-e-r.github.io/MidTermProject-HTML/game/index.html <br/>
- https://k-e-r.github.io/MidTermProject-HTML/anime/index.html <br/>
+ https://www.kestudies.com/st/bookinfo/ <br/>
  // using Rakuten API DEMO Page <br/>
 
 # Usage
