@@ -21,11 +21,7 @@ input {
   border-bottom: 1px solid #333;
 }
 
-.book svg {
-  fill: #4444449f;
-}
-
-.game svg {
+svg {
   fill: #4444449f;
 }
 

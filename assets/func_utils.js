@@ -110,12 +110,7 @@ showItems = (info, genre) => {
         : item.largeImageUrl;
     const url = item.affiliateUrl === '' ? '-' : item.affiliateUrl;
     const rateVal = checkRate(parseFloat(item.reviewAverage).toFixed(1));
-    if (
-      genre === apiData.books.genreId.comic ||
-      genre === apiData.books.genreId.lnovel ||
-      genre === apiData.books.genreId.novel ||
-      genre === apiData.books.genreId.art
-    ) {
+    if (genre.indexOf('001') === 0) {
       option.innerHTML = `
         <img src="${image}" />
         <div class="detailsCont">
@@ -142,7 +137,7 @@ showItems = (info, genre) => {
           <p class="desc">ISBN </p><p class="data">: ${item.isbn}</p>
         </div>
       `;
-    } else {
+    } else if (genre.indexOf('006') === 0) {
       option.innerHTML = `
         <img src="${image}" />
         <div class="detailsCont">
@@ -165,6 +160,30 @@ showItems = (info, genre) => {
           <p class="desc">Sales Date </p><p class="data">: ${item.salesDate}</p>
           <p class="desc">Label </p><p class="data">: ${item.label}</p>
           <p class="desc">Hardware </p><p class="data">: ${item.hardware}</p>
+          <p class="desc">JAN </p><p class="data">: ${item.jan}</p>
+        </div>
+      `;
+    } else {
+      option.innerHTML = `
+        <img src="${image}" />
+        <div class="detailsCont">
+          <p class="title">${item.title}</p>
+          <p class="maker">${item.label}</p>
+          <p class="review">
+            <span class="rate rate${rateVal}"></span>
+            ${item.reviewAverage}
+          </p>
+          <br />
+          <p class="status">${availability(item.availability)}</p>
+          <a href="${url}" class="btn" target="_blank">PURCHASE</a>
+        </div>
+      `;
+      optionAdd.className = 'mDetails';
+      optionAdd.innerHTML = `
+        <div class="moreDetailsCont">
+          <p>Product Information</p>
+          <p class="desc">Sales Date </p><p class="data">: ${item.salesDate}</p>
+          <p class="desc">Label </p><p class="data">: ${item.label}</p>
           <p class="desc">JAN </p><p class="data">: ${item.jan}</p>
         </div>
       `;
@@ -196,6 +215,8 @@ createHeroRanking = async (genres) => {
       title.innerHTML = `<h2 class="rankLine${i}">Sales Ranking (${apiData.books.genreName[genre]})</h2>`;
     } else if (genres[0] === apiData.games.genreId.game) {
       title.innerHTML = `<h2 class="rankLine${i}">Sales Ranking (${apiData.games.genreName[genre]})</h2>`;
+    } else if (genres[0] === apiData.anime.genreId.anime) {
+      title.innerHTML = `<h2 class="rankLine${i}">Sales Ranking (${apiData.anime.genreName[genre]})</h2>`;
     }
     ranking.appendChild(title);
 
@@ -223,6 +244,15 @@ createHeroRanking = async (genres) => {
           </div>
         `;
       } else if (genres[0] === apiData.games.genreId.game) {
+        option.innerHTML = `
+          <img src="${item.Item.largeImageUrl}" />
+          <div class="contents">
+            <p class="title">${item.Item.title}</p>
+            <p class="maker">${item.Item.label}</p>
+            <p class="salesDate">${item.Item.salesDate}</p>
+          </div>
+        `;
+      } else if (genres[0] === apiData.anime.genreId.anime) {
         option.innerHTML = `
           <img src="${item.Item.largeImageUrl}" />
           <div class="contents">

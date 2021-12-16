@@ -9,6 +9,7 @@ const apiData = {
         'https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?',
       games:
         'https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?',
+      anime: 'https://app.rakuten.co.jp/services/api/BooksDVD/Search/20170404?',
     },
   },
   books: {
@@ -39,6 +40,20 @@ const apiData = {
       '006516': 'Xbox Series X',
     },
   },
+  anime: {
+    genreId: {
+      anime: '003206002',
+      action: '003206002001',
+      sf: '003206002002',
+      fantasy: '003206002004',
+    },
+    genreName: {
+      '003206002': 'Total',
+      '003206002001': 'Action',
+      '003206002002': 'SF',
+      '003206002004': 'Fantasy',
+    },
+  },
 };
 
 const searchItems = async (
@@ -49,12 +64,11 @@ const searchItems = async (
   outOfStock = 0
 ) => {
   const url =
-    genreId === apiData.books.genreId.comic ||
-    genreId === apiData.books.genreId.lnovel ||
-    genreId === apiData.books.genreId.novel ||
-    genreId === apiData.books.genreId.art
+    genreId.indexOf('001') === 0
       ? apiData.general.url.books
-      : apiData.general.url.games;
+      : genreId.indexOf('006') === 0
+      ? apiData.general.url.games
+      : apiData.general.url.anime;
   if (keyword === '') {
     const response = await axios.get(url, {
       params: {
