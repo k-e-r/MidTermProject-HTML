@@ -36,7 +36,7 @@ showRanking = async (genre, kind) => {
   s_ranking.innerHTML = '';
   const title = document.createElement('div');
   title.className = `rankingTitle`;
-  title.innerHTML = `<h2 class="total">Sales Ranking (${kind})</h2>`;
+  title.innerHTML = `<h2 class="rankLine0">Sales Ranking (${kind})</h2>`;
   s_ranking.appendChild(title);
   for (let item of items) {
     const option = document.createElement('a');
@@ -185,6 +185,7 @@ showItems = (info, genre) => {
 createHeroRanking = async (genres) => {
   const ranking = document.querySelector('#ranking-container');
   ranking.innerHTML = '';
+  let i = 0;
   for (let genre of genres) {
     const lists = await searchItems('', 'sales', genre, 3);
     const items = lists.Items;
@@ -192,9 +193,9 @@ createHeroRanking = async (genres) => {
     const title = document.createElement('div');
     title.className = 'rankingTitle';
     if (genres[0] === apiData.books.genreId.comic) {
-      title.innerHTML = `<h2 class="total">Sales Ranking (${apiData.books.genreName[genre]})</h2>`;
+      title.innerHTML = `<h2 class="rankLine${i}">Sales Ranking (${apiData.books.genreName[genre]})</h2>`;
     } else if (genres[0] === apiData.games.genreId.game) {
-      title.innerHTML = `<h2 class="total">Sales Ranking (${apiData.games.genreName[genre]})</h2>`;
+      title.innerHTML = `<h2 class="rankLine${i}">Sales Ranking (${apiData.games.genreName[genre]})</h2>`;
     }
     ranking.appendChild(title);
 
@@ -233,5 +234,6 @@ createHeroRanking = async (genres) => {
       }
       title.appendChild(option);
     }
+    i++;
   }
 };
