@@ -16,16 +16,17 @@ onInput = async (event, title = '') => {
           'https://yoshino9397.github.io/TrainProject/HTML/index.html',
         reviewAverage: '5',
         availability: '1',
-        largeImageUrl: 'https://placehold.jp/100x160.png',
+        largeImageUrl: '../assets/package.jpg',
       },
     };
     ranking.style.display = 'none';
     s_ranking.style.display = 'block';
     results.innerHTML = '';
-    const option = document.createElement('a');
+    const option = document.createElement('div');
+    option.className = 'resLists';
     const image =
       item.Item.largeImageUrl === ''
-        ? 'https://placehold.jp/100x160.png'
+        ? 'https://placehold.jp/100x150.png'
         : item.Item.largeImageUrl;
 
     option.innerHTML = `
@@ -72,10 +73,11 @@ onInput = async (event, title = '') => {
       const items = lists.Items;
       results.innerHTML = '';
       for (let item of items) {
-        const option = document.createElement('a');
+        const option = document.createElement('div');
+        option.className = 'resLists';
         const image =
           item.Item.largeImageUrl === ''
-            ? 'https://placehold.jp/400x250.png'
+            ? 'https://placehold.jp/100x150.png'
             : item.Item.largeImageUrl;
 
         option.innerHTML = `

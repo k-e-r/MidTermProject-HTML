@@ -21,10 +21,11 @@ onInput = async (event, title = '') => {
       const items = lists.Items;
       results.innerHTML = '';
       for (let item of items) {
-        const option = document.createElement('a');
+        const option = document.createElement('div');
+        option.className = 'resLists';
         const image =
           item.Item.largeImageUrl === ''
-            ? 'https://placehold.jp/400x250.png'
+            ? 'https://placehold.jp/100x150.png'
             : item.Item.largeImageUrl;
 
         option.innerHTML = `

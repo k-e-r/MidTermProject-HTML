@@ -25,13 +25,15 @@ input {
   line-height: 1.5rem;
   font-size: 1.1rem;
   border: none;
-  outline: 0;
+  outline: none;
   background-color: transparent;
   text-align: center;
+  border-radius: 0;
 }
 
 input:focus {
   background-color: rgba(255, 255, 255, 0.2);
+  outline: none;
 }
 
 .icon1 {
@@ -57,7 +59,7 @@ article {
   font-size: 0.8rem;
 }
 
-.results > a {
+.results > div {
   display: flex;
   padding: 0.5rem 0.5rem;
   border: 1px solid #ffffff85;

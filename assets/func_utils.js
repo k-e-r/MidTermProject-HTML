@@ -15,7 +15,7 @@ createAutoComplete = (pHolder) => {
     <label><input class="input" placeholder="${pHolder}" /></label>
   `;
   const input = document.querySelector('#autocomplete').querySelector('input');
-  input.addEventListener('input', debounce(onInput, 500));
+  input.addEventListener('input', debounce(onInput));
 
   const logo = document.querySelector('h1');
   logo.onclick = async () => {
@@ -106,7 +106,7 @@ showItems = (info, genre) => {
     option.className = 'details';
     const image =
       item.largeImageUrl === ''
-        ? 'https://placehold.jp/400x250.png'
+        ? 'https://placehold.jp/100x150.png'
         : item.largeImageUrl;
     const url = item.affiliateUrl === '' ? '-' : item.affiliateUrl;
     const rateVal = checkRate(parseFloat(item.reviewAverage).toFixed(1));
