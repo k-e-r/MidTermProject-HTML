@@ -8,7 +8,7 @@ input {
   border-bottom: 1px solid #ffffff85;
 }
 
-.book svg {
+svg {
   fill: #ffffff85;
 }
 
@@ -115,8 +115,4 @@ input {
 
 /* Smartphone */
 @media (max-width: 500px) {
-  .book svg {
-    opacity: 1;
-    fill: #ffffff85;
-  }
 }
