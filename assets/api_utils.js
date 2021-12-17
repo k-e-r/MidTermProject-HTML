@@ -80,7 +80,7 @@ const searchItems = async (
       },
     });
 
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   } else {
     const response = await axios.get(url, {
@@ -95,7 +95,7 @@ const searchItems = async (
       },
     });
 
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   }
 };

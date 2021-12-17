@@ -99,7 +99,7 @@ svg {
   background-color: #333333d8;
 }
 
-.results > a {
+.results > div {
   width: 95%;
   margin: 0 auto 1rem;
 }

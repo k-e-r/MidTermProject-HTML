@@ -10,7 +10,7 @@ onInput = async (event, title = '') => {
         title: '地下室の怪人',
         label: 'Yoshino Yayama',
         salesDate: '2021年12月17日',
-        hardware: 'Windows PC(Me/98/95) / iMac',
+        hardware: 'Windows PC (Me/98/95) / iMac',
         jan: '0123456789',
         affiliateUrl:
           'https://yoshino9397.github.io/TrainProject/HTML/index.html',

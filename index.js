@@ -20,7 +20,7 @@ onInput = async (event, title = '') => {
     results.innerHTML = '';
     for (let item of items) {
       if (item.season_name !== '' && item.season_name !== undefined) {
-        const option = document.createElement('a');
+        const option = document.createElement('div');
         const image =
           item.images.recommended_url === ''
             ? 'https://placehold.jp/400x250.png'
