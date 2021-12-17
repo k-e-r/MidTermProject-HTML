@@ -15,7 +15,7 @@ createAutoComplete = (pHolder) => {
     <label><input class="input" placeholder="${pHolder}" /></label>
   `;
   const input = document.querySelector('#autocomplete').querySelector('input');
-  input.addEventListener('input', debounce(onInput));
+  input.addEventListener('input', debounce(onInput, 500));
 
   const logo = document.querySelector('h1');
   logo.onclick = async () => {
@@ -110,6 +110,7 @@ showItems = (info, genre) => {
         : item.largeImageUrl;
     const url = item.affiliateUrl === '' ? '-' : item.affiliateUrl;
     const rateVal = checkRate(parseFloat(item.reviewAverage).toFixed(1));
+    // memo: It could be shorter...
     if (genre.indexOf('001') === 0) {
       option.innerHTML = `
         <img src="${image}" />
@@ -213,13 +214,13 @@ createHeroRanking = async (genres) => {
 
     const title = document.createElement('div');
     title.className = 'rankingTitle';
-    if (genres[0] === apiData.books.genreId.comic) {
-      title.innerHTML = `<h2 class="rankLine${i}">Sales Ranking (${apiData.books.genreName[genre]})</h2>`;
-    } else if (genres[0] === apiData.games.genreId.game) {
-      title.innerHTML = `<h2 class="rankLine${i}">Sales Ranking (${apiData.games.genreName[genre]})</h2>`;
-    } else if (genres[0] === apiData.anime.genreId.anime) {
-      title.innerHTML = `<h2 class="rankLine${i}">Sales Ranking (${apiData.anime.genreName[genre]})</h2>`;
-    }
+    const rankGenre =
+      genres[0] === apiData.books.genreId.comic
+        ? apiData.books.genreName[genre]
+        : genres[0] === apiData.games.genreId.game
+        ? apiData.games.genreName[genre]
+        : apiData.anime.genreName[genre];
+    title.innerHTML = `<h2 class="rankLine${i}">Sales Ranking (${rankGenre})</h2>`;
     ranking.appendChild(title);
 
     for (let item of items) {
@@ -245,16 +246,10 @@ createHeroRanking = async (genres) => {
             <p class="salesDate">${item.Item.salesDate}</p>
           </div>
         `;
-      } else if (genres[0] === apiData.games.genreId.game) {
-        option.innerHTML = `
-          <img src="${item.Item.largeImageUrl}" />
-          <div class="contents">
-            <p class="title">${item.Item.title}</p>
-            <p class="maker">${item.Item.label}</p>
-            <p class="salesDate">${item.Item.salesDate}</p>
-          </div>
-        `;
-      } else if (genres[0] === apiData.anime.genreId.anime) {
+      } else if (
+        genres[0] === apiData.games.genreId.game ||
+        genres[0] === apiData.anime.genreId.anime
+      ) {
         option.innerHTML = `
           <img src="${item.Item.largeImageUrl}" />
           <div class="contents">

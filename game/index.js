@@ -110,7 +110,7 @@ onInput = async (event, title = '') => {
   }
 };
 
-createAutoComplete('牧場物語');
+createAutoComplete('うたわれるもの');
 const gamesRankGenre = [
   apiData.games.genreId.game,
   apiData.games.genreId.ps5,
