@@ -23,7 +23,7 @@ const checkSeason = () => {
 const searchTitle = async (title) => {
   const response = await axios.get('https://api.annict.com/v1/works', {
     params: {
-      access_token: 'M6Vyw8ESfMMLQy7sAlfRdTeVhSuFvTh2GXTHw2nd8_A',
+      access_token: '',
       filter_title: title,
       sort_season: 'desc',
     },
@@ -36,7 +36,7 @@ const searchTitle = async (title) => {
 const searchSeason = async (season) => {
   const response = await axios.get('https://api.annict.com/v1/works', {
     params: {
-      access_token: 'M6Vyw8ESfMMLQy7sAlfRdTeVhSuFvTh2GXTHw2nd8_A',
+      access_token: '',
       filter_season: season,
       sort_watchers_count: 'desc',
     },
