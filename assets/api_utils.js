@@ -1,8 +1,8 @@
 const apiData = {
   general: {
     id: {
-      appId: '1001664570423200416',
-      affId: '0ab15da8.13a0f7f4.0ab15da9.075fbfdf',
+      appId: '',
+      affId: '',
     },
     url: {
       books:
