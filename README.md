@@ -2,7 +2,7 @@
 This is a web application created for the presentation of MidTerm.
 
 # DEMO
- https://www.kestudies.com/st/bookinfo/ <br/>
+ [https://www.kestudies.com/st/bookinfo/](https://bookinfo-1ss.pages.dev/) <br/>
  // using Rakuten API DEMO Page <br/>
 
 # Usage
